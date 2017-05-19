@@ -13,7 +13,7 @@ public class TestaSaida {
 		OutputStreamWriter osw = new OutputStreamWriter(os);
 		BufferedWriter bw =  new BufferedWriter(osw);
 		
-		bw.write("caelum");
+		bw.write("Nova linha");
 		
 		bw.close();
 	}
