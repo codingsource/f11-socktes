@@ -1,6 +1,8 @@
 package br.com.codingsource.chat;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -11,15 +13,18 @@ public class Cliente {
 
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		cliente = new Socket("127.0.0.1", 4000);
+		
+		InputStream is = new FileInputStream("./file/arquivo.txt");
+		Scanner s = new Scanner(is);
+		PrintStream ps = new PrintStream(cliente.getOutputStream());
 
-		Scanner teclado = new Scanner(System.in);
-		PrintStream saida = new PrintStream(cliente.getOutputStream());
-
-		while (teclado.hasNextLine()) {
-			saida.println(teclado.nextLine());
+		while (s.hasNextLine()) {
+			String string = s.nextLine();
+			ps.println(string);
 		}
 
-		saida.close();
-		teclado.close();
+		ps.close();
+		s.close();
+		cliente.close();
 	}
 }
